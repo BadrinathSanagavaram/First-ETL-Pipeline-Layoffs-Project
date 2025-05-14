@@ -124,10 +124,45 @@ Select TRIM(TRAILING '.' FROM country)
 from layoff_stagging_2;
 
 Update layoff_stagging_2
-SET country = trim(trailing '.' FROM country);
+SET country = trim(trailing '.' FROM country) and 
+country = trim(country);
 
 # Checking whether the changes made are reflected or not
 Select distinct(country)
 from layoff_stagging_2
 Where country like "%." OR country like " % "
 Order by country;
+
+SELECT Distinct(substring(country,1,1)) as starting_char FROM layoff_stagging_2;
+
+## Obtaning the Data type of all the columns in the layoff_stagging 2 table
+
+Select TABLE_SCHEMA, COLUMN_NAME, COLUMN_TYPE 
+from INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'layoff_stagging_2' and COLUMN_NAME IN ('company', 'country', 'date', 'funds_raised_millions', 'industry');
+
+# WE HAVE SEEN THAT THE COLUMN TYPE OF DATE COLUMN IS TEXT WE HAVE TO CONVERT IT INTO DATE
+
+SELECT `date`,
+str_to_date(`date`, '%m/%d/%Y') 
+FROM layoff_stagging_2;
+
+update layoff_stagging_2
+SET `date` = str_to_date(`date`, '%m/%d/%Y');
+
+Select TABLE_SCHEMA, COLUMN_NAME, COLUMN_TYPE 
+from INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'layoff_stagging_2' and COLUMN_NAME IN ('date');
+
+## Even though we have converted this to date format we have to convert the type to date format using ALTER
+
+ALTER TABLE layoff_stagging_2
+MODIFY COLUMN `date` date;
+
+Select TABLE_SCHEMA, COLUMN_NAME, COLUMN_TYPE 
+from INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'layoff_stagging_2' and COLUMN_NAME IN ('date');
+
+## NOW WHAT WE ARE TRYING TO DO IS TO REPLACE NULL VALUES AND BLANK VALUES
+
+
