@@ -165,4 +165,50 @@ WHERE TABLE_NAME = 'layoff_stagging_2' and COLUMN_NAME IN ('date');
 
 ## NOW WHAT WE ARE TRYING TO DO IS TO REPLACE NULL VALUES AND BLANK VALUES
 
+SELECT * 
+FROM layoff_stagging_2
+Where industry is null; 
 
+SELECT * 
+FROM layoff_stagging_2
+Where company = "Airbnb"; 
+
+
+SELECT T1.company, T2.industry 
+FROM layoff_stagging_2 T1
+JOIN layoff_stagging_2 T2
+ON T1.company = T2.company
+WHERE T1.industry IS NULL AND T2.industry IS NOT NULL;
+
+UPDATE layoff_stagging_2 T1
+JOIN layoff_stagging_2 T2
+	ON T1.COMPANY = T2.COMPANY
+SET T1.industry = T2.industry
+WHERE T1.industry IS NULL AND T2.industry IS NOT NULL;
+
+SELECT T1.company, T2.industry 
+FROM layoff_stagging T1
+JOIN layoff_stagging T2
+ON T1.company = T2.company
+WHERE T1.industry IS NULL and T1.company = 'Airbnb'
+AND T2.industry IS NOT NULL;
+
+# Deleting where total laid off is Null and percentage laid off is also null
+
+SELECT * 
+FROM layoff_stagging_2
+Where total_laid_off IS NULL
+AND percentage_laid_off is NULL;
+
+Delete  
+FROM layoff_stagging_2
+Where total_laid_off IS NULL
+AND percentage_laid_off is NULL;
+
+Select * 
+from layoff_stagging_2;
+
+# Deleting row_num column because it is not useful for us
+
+alter table layoff_stagging_2
+drop column RNK;
