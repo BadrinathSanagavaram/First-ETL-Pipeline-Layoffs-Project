@@ -57,8 +57,19 @@ FROM layoff_stagging_2
 having total_number_of_employess is not null
 order by total_number_of_employess desc;
 
-SELECT `date` , row_number 
-FROM layoff_stagging_2;
+
+WITH Group_total_count AS
+(
+SELECT 
+year(`date`) as Year, month(`date`) as Month, sum(total_laid_off) as Total_laid_off
+FROM layoff_stagging_2
+Group by year(`date`), month(`date`)
+Having Month is not null
+Order by 1,2)
+
+Select * , 
+sum(Total_laid_off) over(Order by Year,Month ASC) as rolling_total
+FROM Group_total_count;
 
 
 
