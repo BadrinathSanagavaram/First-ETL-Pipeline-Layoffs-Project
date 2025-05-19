@@ -69,7 +69,8 @@ Executed key SQL queries to extract insights:
   - Darker shades indicate **higher layoff volumes**
   - Countries like **USA, Japan, and Canada** appear darkest — showing highest impact
 - Enabled quick identification of global **layoff hotspots** for stakeholders and decision-makers.
-- ![Screenshot 2025-05-17 at 11 42 55 PM](https://github.com/user-attachments/assets/13ae079c-45b7-42ad-aa78-dbea6a7e7230)
+
+![Screenshot 2025-05-17 at 11 42 55 PM](https://github.com/user-attachments/assets/13ae079c-45b7-42ad-aa78-dbea6a7e7230)
 
 
 ---
